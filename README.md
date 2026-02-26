@@ -1,12 +1,22 @@
 # bitcoin2026-workshop-stage
 
-## Conference Proposals
+Welcome to the Bitcoin 2026 Workshop Stage! A few of us were tired of paper bitcoin and decided to start a dev/workshop takeover. So like all good takeovers, we first asked for permission 😝 
 
-Welcome! To submit a presentation:
+Good news is, we asked for permission, so you don't have to. We want to see what you've been workin' on, thinking about, and tinkering with. If you have something too exciting to keep to yourself, we want to know. You have the opportunity to share your ideas at the biggest Bitcoin Conference in the World. So, what are you waiting for?! Propose your talk now!! 👇
 
-1. **Fork this repository** – this creates your own copy of the repo.  
-2. **Copy the template** from `templates/presentation_proposal_template.md` into the `submissions/` folder.  
-3. **Fill in all the fields** (Title, Speaker, Day/Time, Duration, Description, Target Audience, Requirements).  
-4. **Submit a Pull Request** to merge your proposal into this repository.  
+---
 
-Once merged, your proposal will be part of the official schedule!
+## How To Submit a Proposal
+
+1. Click the **Issues** tab at the top of this repository.
+2. Click **New Issue**.
+3. Select **Talk Proposal**.
+4. Fill out all the sections in the form.
+5. Click **Submit**.
+
+That’s it. No forking. No pull requests. Just tell us what you're building.
+
+---
+
+Accepted talks will be reviewed by the Workshop Stage organizers and added to the official schedule.
+Special thank you to Tidwell, and Tabconf, for letting us take advantage of true FOSS.
