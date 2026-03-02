@@ -36,12 +36,6 @@ What makes it interesting or important?
 
 ---
 
-## Track
-
-Which track does this belong in?
-
----
-
 ## Technical Level
 
 - [ ] Beginner
