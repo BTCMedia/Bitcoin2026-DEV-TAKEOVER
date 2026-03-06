@@ -1,8 +1,8 @@
 # bitcoin2026-workshop-stage
 
-Welcome to the Bitcoin 2026 Workshop Stage! A few of us were tired of paper bitcoin and decided to start a dev/workshop takeover. So like all good takeovers, we first asked for permission 😝 
+Welcome to the Bitcoin 2026 Workshop Stage! A few of us were tired of paper bitcoin summer and were ready for open-source spring.
 
-Good news is, we asked for permission, so you don't have to. We want to see what you've been workin' on, thinking about, and tinkering with. If you have something too exciting to keep to yourself, we want to know. You have the opportunity to share your ideas at the biggest Bitcoin Conference in the World. So, what are you waiting for?! Propose your talk now!! 👇
+We want to see what you've been workin' on, thinking about, and tinkering with. If you have something too exciting to keep to yourself, we want to know. You have the opportunity to share your ideas at the biggest Bitcoin Conference in the World. So, what are you waiting for?! Propose your talk/workshop now!! :point_down:
 
 ---
 
