@@ -1,6 +1,7 @@
-# bitcoin2026-workshop-stage
+# Bitcoin 2026 - Dev Takeover
 
 Welcome to the Bitcoin 2026 Workshop Stage! A few of us were tired of paper bitcoin summer and were ready for open-source spring.
+<img width="1920" height="2636" alt="image" src="https://github.com/user-attachments/assets/9841d946-514f-480a-b299-7360c11ebb41" />
 
 We want to see what you've been workin' on, thinking about, and tinkering with. If you have something too exciting to keep to yourself, we want to know. You have the opportunity to share your ideas at the biggest Bitcoin Conference in the World. So, what are you waiting for?! Propose your talk/workshop now!! :point_down:
 
