@@ -19,7 +19,7 @@ That’s it. No forking. No pull requests. Just tell us what you're building.
 
 ---
 
-To jump propose a talk [click here](https://github.com/BTCMedia/bitcoin2026-workshops/issues)
+To jump to proposing a talk [click here](https://github.com/BTCMedia/bitcoin2026-workshops/issues)
 
 To see the Workshop Stage Schedule [click here](https://github.com/orgs/BTCMedia/projects/6)
 
