@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bitcoin 2026 Workshop Submissions</title>
+  <style>
+    body{ background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;}
+    #btc-submissions {
+      color: #fff;
+      overflow-x: auto;
+    }
+    </style>
+
+
+
+    <style>
+    #btc-submissions .btc-loading,
+    #btc-submissions .btc-error,
+    #btc-submissions .btc-count {
+      padding: 1rem 0;
+      color: #666;
+      font-size: 0.85rem;
+    }
+
+    #btc-submissions .btc-error { color: #f55; }
+
+    #btc-submissions table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    #btc-submissions th {
+      padding: 0.6rem 1rem 0.6rem 0;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #666;
+      border-bottom: 1px solid #222;
+      white-space: nowrap;
+    }
+
+    #btc-submissions td {
+      padding: 0.75rem 1rem 0.75rem 0;
+      vertical-align: top;
+      border-bottom: 1px solid #111;
+    }
+
+    #btc-submissions .btc-title { font-weight: 600; }
+
+    #btc-submissions .btc-speaker {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    #btc-submissions .btc-speaker img {
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    #btc-submissions .btc-desc {
+      color: #888;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+
+    #btc-submissions .btc-link a {
+      color: #f7931a;
+      text-decoration: none;
+      font-size: 0.82rem;
+    }
+
+    #btc-submissions .btc-link a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<div id="btc-submissions">
+  <p class="btc-loading">Loading submissions…</p>
+</div>
+
+<script>
+  // ── Configurable constants ─────────────────────────────────────────────────
+  const REPO            = 'BTCMedia/Bitcoin2026-DEV-TAKEOVER';
+  const LABEL           = 'Day 1';              // filter by label (e.g. 'accepted', 'Day 1'); empty = show all open issues
+  const MAX_DESC_LENGTH = 200;                  // truncate description after N chars
+  // ──────────────────────────────────────────────────────────────────────────
+
+  const API_URL = LABEL
+    ? `https://api.github.com/repos/${REPO}/issues?state=open&labels=${encodeURIComponent(LABEL)}&per_page=100`
+    : `https://api.github.com/repos/${REPO}/issues?state=open&per_page=100`;
+
+  // Extract the text content of a ## Heading section from the issue body.
+  function parseSection(body, heading) {
+    const regex = new RegExp(
+      `##\\s+${heading}\\s*\\n([\\s\\S]*?)(?=\\n---\\n|\\n##\\s|$)`,
+      'i'
+    );
+    const match = body.match(regex);
+    return match ? match[1].trim() : '';
+  }
+
+  // From a section that contains checkboxes, return the checked item's text.
+  function parseChecked(body, heading) {
+    const section = parseSection(body, heading);
+    const match = section.match(/- \[x\] (.+)/i);
+    return match ? match[1].trim() : '—';
+  }
+
+  // Truncate a string at word boundary.
+  function truncate(str, max) {
+    if (!str || str.length <= max) return str || '—';
+    return str.slice(0, max).replace(/\s+\S*$/, '') + '…';
+  }
+
+  function escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function parseIssue(issue) {
+    const body = issue.body || '';
+    const speaker    = parseSection(body, 'Speaker Name');
+    const level      = parseChecked(body, 'Technical Level');
+    const duration   = parseChecked(body, 'Duration');
+    const descFull   = parseSection(body, 'What is this talk about\\?');
+    const desc       = truncate(descFull, MAX_DESC_LENGTH);
+
+    return {
+      title:    issue.title,
+      url:      issue.html_url,
+      avatar:   issue.user.avatar_url,
+      speaker:  speaker || '—',
+      level:    level,
+      duration: duration,
+      desc:     desc,
+    };
+  }
+
+  function buildTable(talks) {
+    if (talks.length === 0) {
+      return '<p class="btc-loading">No accepted submissions yet.</p>';
+    }
+
+    const rows = talks.map(t => `
+      <tr>
+        <td class="btc-title">${escapeHtml(t.title)}</td>
+        <td class="btc-speaker"><img src="${escapeHtml(t.avatar)}" alt="" width="28" height="28">${escapeHtml(t.speaker)}</td>
+        <td>${escapeHtml(t.level)}</td>
+        <td>${escapeHtml(t.duration)}</td>
+        <td class="btc-desc">${escapeHtml(t.desc)}</td>
+        <td class="btc-link"><a href="${escapeHtml(t.url)}" target="_blank" rel="noopener">View →</a></td>
+      </tr>`).join('');
+
+    return `
+      <p class="btc-count">${talks.length} accepted talk${talks.length !== 1 ? 's' : ''} &mdash; <em>Schedule and times are subject to change.</em></p>
+      <table>
+        <thead>
+          <tr>
+            <th>Talk Title</th>
+            <th>Speaker</th>
+            <th>Level</th>
+            <th>Duration</th>
+            <th>Description</th>
+            <th>Proposal</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const mount = document.getElementById('btc-submissions');
+
+    try {
+      const resp = await fetch(API_URL, {
+        headers: { 'Accept': 'application/vnd.github.v3+json' }
+      });
+
+      if (!resp.ok) {
+        throw new Error(`GitHub API error: ${resp.status} ${resp.statusText}`);
+      }
+
+      const issues = await resp.json();
+
+      // Exclude pull requests (GitHub API returns PRs in issues endpoint)
+      const proposals = issues.filter(i => !i.pull_request);
+
+      const talks = proposals.map(parseIssue);
+
+      mount.innerHTML = buildTable(talks);
+    } catch (err) {
+      console.error('[btc-submissions]', err);
+      mount.innerHTML = `<p class="btc-error">Failed to load submissions: ${escapeHtml(err.message)}</p>`;
+    }
+  });
+</script>
+
+</body>
+</html>
